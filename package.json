@@ -10,8 +10,11 @@
     "react": "16.3.0-alpha.2",
     "react-native": "0.54.2",
     "react-native-app-intro": "^1.1.5",
+    "react-native-linear-gradient": "^2.4.0",
     "react-native-material-kit": "^0.5.1",
     "react-native-vector-icons": "^4.5.0",
+    "react-native-video": "^2.0.0",
+    "react-native-video-controls": "^2.2.0",
     "react-navigation": "^1.5.7"
   },
   "devDependencies": {
