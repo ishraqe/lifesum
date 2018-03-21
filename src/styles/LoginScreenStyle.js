@@ -4,15 +4,17 @@ import colors from '../assets/colors';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingLeft: 20,
+        paddingRight: 20,
     },
     socialLoginContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 20,
+        marginTop: 10,
     },
     socialLoginContainerText: {
-      color: colors.black,
+        color: colors.black,
         fontSize: 16,
         fontWeight: 'bold',
     },
@@ -37,11 +39,13 @@ const styles = StyleSheet.create({
     },
     loginContainer: {
         flex: 1,
+        marginTop: 30,
     },
     forgotPassContainer: {
         flex: 0.5,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-
 });
 
 export default styles;

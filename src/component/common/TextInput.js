@@ -23,27 +23,27 @@ class Input extends Component {
     }
 };
 
-const styles={
+const styles = {
     inputStyle: {
         color: '#000',
-        paddingTop:3,
-        paddingRight:5,
-        paddingLeft:5,
-        fontSize:18,
-        flex:2
+        paddingTop: 3,
+        paddingRight: 5,
+        paddingLeft: 5,
+        fontSize: 18,
+        flex: 2
     },
-    labelStyle:{
-        fontSize:19,
-        paddingLeft:20,
-        flex:1,
-        color:'#000'
+    labelStyle: {
+        fontSize: 19,
+        paddingLeft: 20,
+        flex: 1,
+        color: '#000',
     },
-    containerStyle:{
-        height:40,
-        flex:1,
-        flexDirection:'row',
-        alignItems:'center'
-    }
+    containerStyle: {
+        height: 40,
+        marginTop: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
 }
 
-export {Input }
+export { Input }

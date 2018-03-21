@@ -4,6 +4,7 @@ const colors = {
     gradientColor2: '#00b698',
     black: '#323648',
     facebookColor: '#3b5998',
+    signUpButtonColor: '#767774',
 };
 
 export default colors;

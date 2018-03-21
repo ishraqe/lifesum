@@ -26,9 +26,8 @@ const styles = StyleSheet.create({
     },
     title: {
         color: colors.whiteColor,
-        fontSize: 45,
-        fontWeight: 'bold',
-        fontFamily: 'DancingScript-Bold',
+        fontSize: 60,
+        fontFamily: 'Italianno_Regular',
     },
     buttonContainer: {
         height: '35%',
@@ -49,15 +48,17 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: 'transparent',
         borderColor: 'transparent',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     buttonText: {
-        color: '#fff',
+        color: colors.whiteColor,
     },
     loginHeader: {
         marginTop: 20,
         marginBottom: 10,
         color: colors.whiteColor,
-    }
+    },
 });
 
 export default styles;

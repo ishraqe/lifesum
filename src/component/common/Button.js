@@ -1,30 +1,43 @@
 import React from 'react';
-import { View, Text, TouchableNativeFeedback } from 'react-native';
+import { View, Text, TouchableNativeFeedback, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
 const CustomButton = (props) => {
     const { buttonStyle, textStyle} = styles;
-    const { label } = props;
-
+    const { label, imagePath } = props;
+    console.log(props);
     const content = (
         <View style={[buttonStyle, props.style]}>
             <Text style={[textStyle, props.textStyle]}>
-                {props.children}
+                { props.children }
             </Text>
         </View>
     );
     if(label) {
         return (
-            <View style={[buttonStyle, props.style, {flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: -5}]}>
+            <View style={[buttonStyle, props.style, {flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}]}>
+                <Icon
+                    name={label}
+                    size={40}
+                    style={styles.iconStyle}
+                />
                 <Text style={[textStyle, props.textStyle]}>
                     {props.children}
                 </Text>
-                <Icon
-                    name={label}
-                    size={50}
-                    style={styles.iconStyle}
+            </View>
+        );
+    }
+    if(imagePath) {
+        return (
+            <View style={[buttonStyle, props.style, {flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}]}>
+                <Image
+                    source={imagePath}
+                    style={styles.imageStyle}
                 />
+                <Text style={[textStyle, props.textStyle]}>
+                    {props.children}
+                </Text>
             </View>
         );
     }
@@ -52,9 +65,15 @@ const styles = {
     },
     iconStyle: {
         color: '#fff',
-        marginLeft: 30,
+        marginLeft: 5,
+        marginRight: 20,
     },
-
+    imageStyle: {
+        height: 40,
+        width: 40,
+        marginLeft: 0,
+        marginRight: 20,
+    },
 };
 
 export { CustomButton };
