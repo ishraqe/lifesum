@@ -2,22 +2,31 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, StatusBar } from 'react-native';
 import Video from 'react-native-video';
 import LinearGradient from 'react-native-linear-gradient';
+import SplashScreen from 'react-native-splash-screen';
 
-import styles from '../styles/HomeScreenStyle';
+import styles from '../styles/AuthScreenStyle';
 import bg from '../assets/bg.mp4';
 import { CustomButton } from '../component/common';
 import colors from '../assets/colors';
 
 class App extends Component {
+    componentDidMount() {
+        SplashScreen.hide();
+    }
     render() {
         return (
           <View style={styles.container}>
+                  <StatusBar
+                      translucent
+                      backgroundColor="rgba(0, 0, 0, 0.01)"
+                      animated
+                  />
                 <Video
                   muted={false}
                   repeat={true}
                   source={bg}
                   resizeMode="cover"
-                  style={[StyleSheet.absoluteFill, { marginLeft: -550 }]}
+                  style={[StyleSheet.absoluteFill, { marginLeft: -500 }]}
                 />
               <View style={styles.menuContainer}>
                   <View style={styles.titleContainer}>

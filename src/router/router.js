@@ -2,12 +2,12 @@ import React from 'react';
 
 import { StackNavigator } from 'react-navigation';
 
-import HomeScreen from '../screens/Home';
+import AuthScreen from '../screens/Auth';
 
 
 const StackNavigators = StackNavigator({
     Home: {
-        screen: HomeScreen,
+        screen: AuthScreen,
         navigationOptions: {
             header: null,
         },
