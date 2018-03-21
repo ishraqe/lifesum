@@ -16,11 +16,6 @@ class App extends Component {
     render() {
         return (
           <View style={styles.container}>
-                  <StatusBar
-                      translucent
-                      backgroundColor="rgba(0, 0, 0, 0.01)"
-                      animated
-                  />
                 <Video
                   muted={false}
                   repeat={true}
@@ -49,8 +44,11 @@ class App extends Component {
                       </LinearGradient>
                       <Text style={styles.loginHeader}>Got a Lifesum account?</Text>
                       <CustomButton
-                          style={[styles.customButton, { backgroundColor: colors.whiteColor, height: 55, borderRadius: 30, }]}
+                          style={[styles.customButton, {
+                              backgroundColor: colors.whiteColor, height: 55, borderRadius: 30, alignItems: 'center',
+                          }]}
                           textStyle={[styles.buttonText, { color: '#000' }]}
+                          onPress={() => this.props.navigation.navigate('Login')}
                       >
                           LOG IN
                       </CustomButton>

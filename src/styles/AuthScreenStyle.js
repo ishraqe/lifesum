@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 20
+        marginBottom: 20,
     },
     welcome: {
         color: colors.whiteColor,
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
         color: colors.whiteColor,
         fontSize: 45,
         fontWeight: 'bold',
+        fontFamily: 'DancingScript-Bold',
     },
     buttonContainer: {
         height: '35%',

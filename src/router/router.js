@@ -3,7 +3,7 @@ import React from 'react';
 import { StackNavigator } from 'react-navigation';
 
 import AuthScreen from '../screens/Auth';
-
+import LoginScreen from '../screens/Login'
 
 const StackNavigators = StackNavigator({
     Home: {
@@ -11,6 +11,10 @@ const StackNavigators = StackNavigator({
         navigationOptions: {
             header: null,
         },
+    },
+    Login: {
+        screen: LoginScreen,
+
     },
 });
 

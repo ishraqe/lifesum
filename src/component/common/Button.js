@@ -1,12 +1,12 @@
 import React from 'react';
-import { View,Text, TouchableNativeFeedback } from 'react-native';
+import { View, Text, TouchableNativeFeedback } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
 const CustomButton = (props) => {
-    const { buttonStyle, textStyle, } = styles;
-    const label = props.label;
-    
+    const { buttonStyle, textStyle} = styles;
+    const { label } = props;
+
     const content = (
         <View style={[buttonStyle, props.style]}>
             <Text style={[textStyle, props.textStyle]}>
@@ -20,14 +20,14 @@ const CustomButton = (props) => {
                 <Text style={[textStyle, props.textStyle]}>
                     {props.children}
                 </Text>
-                <Icon 
+                <Icon
                     name={label}
                     size={50}
                     style={styles.iconStyle}
                 />
             </View>
         );
-    } 
+    }
     return (
         <TouchableNativeFeedback onPress={props.onPress} >
             {content}
@@ -50,10 +50,10 @@ const styles = {
         width: '50%',
         borderRadius: 20,
     },
-    iconStyle : {
-        color : '#fff',
+    iconStyle: {
+        color: '#fff',
         marginLeft: 30,
-    }
+    },
 
 };
 
