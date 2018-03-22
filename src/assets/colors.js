@@ -5,6 +5,7 @@ const colors = {
     black: '#323648',
     facebookColor: '#3b5998',
     signUpButtonColor: '#767774',
+    fontGreyColor: '#ABABAB',
 };
 
 export default colors;

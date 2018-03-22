@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     },
     forgotPassContainer: {
         flex: 0.5,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'center',
     },
