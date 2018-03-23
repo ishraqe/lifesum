@@ -3,6 +3,8 @@ import { StackNavigator } from 'react-navigation';
 import AuthScreen from '../screens/Auth';
 import LoginScreen from '../screens/Login';
 import SignUpScreen from '../screens/SignUp';
+import ChooseGenderScreen from '../component/SignUp/ChooseGender';
+
 import colors from '../assets/colors';
 
 const StackNavigators = StackNavigator({
@@ -28,6 +30,17 @@ const StackNavigators = StackNavigator({
     },
     SignUp: {
         screen: SignUpScreen,
+        navigationOptions: {
+            headerStyle: {
+                backgroundColor: colors.gradientColor1,
+                marginTop: 20,
+                elevation: 0,
+            },
+            headerTintColor: '#fff',
+        },
+    },
+    ChooseGender: {
+        screen: ChooseGenderScreen,
         navigationOptions: {
             headerStyle: {
                 backgroundColor: colors.gradientColor1,

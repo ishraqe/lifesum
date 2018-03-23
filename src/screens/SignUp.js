@@ -1,16 +1,60 @@
 import React, { Component } from 'react';
-import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
+import { View, Text, StatusBar, TouchableOpacity, Animated, Dimensions } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import styles from "../styles/SignUpScreenStyle";
 import colors from "../assets/colors";
-import { CustomButton } from '../component/common';
+
+
+
+const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
+const ButtonWidth = Dimensions.get('window').width - 20;
+
 
 class SignUp extends Component {
+    state = {
+        buttonAnimation: new Animated.Value(ButtonWidth),
+        fontAnimation: new Animated.Value(0),
+        visibleText1 : true,
+        visibleText2 : true,
+        visibleText3 : true,
+    };
     componentDidMount() {
         StatusBar.setHidden(false);
+        this.setState({
+            buttonAnimation: new Animated.Value(ButtonWidth),
+            fontAnimation: new Animated.Value(0),
+        });
+    }
+    handlePress = () => {
+        console.log('pressed');
+        Animated.parallel([
+            Animated.timing(this.state.buttonAnimation, {
+                toValue: 80,
+                duration: 10
+            }),
+            Animated.timing(this.state.fontAnimation, {
+                toValue: 1,
+                duration: 10
+            }),
+        ]).start(() => {
+            setTimeout(() => {
+                this.props.navigation.navigate('ChooseGender')
+            }, 1000);
+        });
     }
     render() {
+        const animatedStyle = {
+            width: this.state.buttonAnimation,
+        };
+        const  titleFontSize = this.state.fontAnimation.interpolate({
+            inputRange: [0, 1],
+            outputRange: [20, 0]
+        });
+        const  subtitleFontSize = this.state.fontAnimation.interpolate({
+            inputRange: [0, 1],
+            outputRange: [15, 0]
+        });
         return (
             <LinearGradient
                 start={{ x: 0.1, y: 0.1 }}
@@ -24,26 +68,29 @@ class SignUp extends Component {
                     barStyle="light-content"
                 />
                 <Text style={styles.heading}>What's your goal?</Text>
-                <TouchableOpacity
-                    style={[styles.customButton]}
+                <AnimatedTouchableOpacity
+                    onPress={this.handlePress}
+                    style={[styles.customButton, animatedStyle]}
                 >
-                    <Text style={styles.titleStyle}>Be Healthier</Text>
-                    <Text style={styles.subtitleStyle}>Eat and train for optimum health</Text>
-                </TouchableOpacity>
+                    <Animated.Text style={[styles.titleStyle, { fontSize: titleFontSize}]}>Be Healthier</Animated.Text>
+                    <Animated.Text style={[styles.subtitleStyle, {fontSize: subtitleFontSize}]}>Eat and train for optimum health</Animated.Text>
+                </AnimatedTouchableOpacity>
 
-                <TouchableOpacity
-                    style={[styles.customButton]}
+                <AnimatedTouchableOpacity
+                    onPress={this.handlePress}
+                    style={[styles.customButton, animatedStyle]}
                 >
-                    <Text style={styles.titleStyle}>Lose Weight</Text>
-                    <Text style={styles.subtitleStyle}>Get leander and increase your stamina</Text>
-                </TouchableOpacity>
+                    <Animated.Text style={[styles.titleStyle, { fontSize: titleFontSize}]}>Lose Weight</Animated.Text>
+                    <Animated.Text style={[styles.subtitleStyle, {fontSize: subtitleFontSize}]}>Get leander and increase your stamina</Animated.Text>
+                </AnimatedTouchableOpacity>
 
-                <TouchableOpacity
-                    style={[styles.customButton]}
+                <AnimatedTouchableOpacity
+                    onPress={this.handlePress}
+                    style={[styles.customButton, animatedStyle]}
                 >
-                    <Text style={styles.titleStyle}>Gain Weight</Text>
-                    <Text style={styles.subtitleStyle}>Build muscle strength</Text>
-                </TouchableOpacity>
+                        <Animated.Text style={[styles.titleStyle, { fontSize: titleFontSize}]}>Gain Weight</Animated.Text>
+                        <Animated.Text style={[styles.subtitleStyle, {fontSize: subtitleFontSize}]}>Build muscle strength</Animated.Text>
+                </AnimatedTouchableOpacity>
             </LinearGradient>
         );
     }
