@@ -6,6 +6,7 @@ const colors = {
     facebookColor: '#3b5998',
     signUpButtonColor: '#767774',
     fontGreyColor: '#ABABAB',
+    headerBackGroundShawdow: '#F2F4F9',
 };
 
 export default colors;

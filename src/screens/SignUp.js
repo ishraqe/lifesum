@@ -15,9 +15,7 @@ class SignUp extends Component {
     state = {
         buttonAnimation: new Animated.Value(ButtonWidth),
         fontAnimation: new Animated.Value(0),
-        visibleText1 : true,
-        visibleText2 : true,
-        visibleText3 : true,
+        selectedButton: 0,
     };
     componentDidMount() {
         StatusBar.setHidden(false);
@@ -26,12 +24,14 @@ class SignUp extends Component {
             fontAnimation: new Animated.Value(0),
         });
     }
-    handlePress = () => {
-        console.log('pressed');
+    handlePress = (buttonNumber) => {
+        this.setState({
+            selectedButton : buttonNumber
+        });
         Animated.parallel([
             Animated.timing(this.state.buttonAnimation, {
                 toValue: 80,
-                duration: 10
+                duration: 30
             }),
             Animated.timing(this.state.fontAnimation, {
                 toValue: 1,
@@ -40,7 +40,7 @@ class SignUp extends Component {
         ]).start(() => {
             setTimeout(() => {
                 this.props.navigation.navigate('ChooseGender')
-            }, 1000);
+            }, 200);
         });
     }
     render() {
@@ -69,27 +69,27 @@ class SignUp extends Component {
                 />
                 <Text style={styles.heading}>What's your goal?</Text>
                 <AnimatedTouchableOpacity
-                    onPress={this.handlePress}
-                    style={[styles.customButton, animatedStyle]}
+                    onPress={() => this.handlePress(1)}
+                    style={[styles.customButton, this.state.selectedButton === 1 ?  animatedStyle : '']}
                 >
-                    <Animated.Text style={[styles.titleStyle, { fontSize: titleFontSize}]}>Be Healthier</Animated.Text>
-                    <Animated.Text style={[styles.subtitleStyle, {fontSize: subtitleFontSize}]}>Eat and train for optimum health</Animated.Text>
+                    <Animated.Text style={[styles.titleStyle, this.state.selectedButton === 1 ?  { fontSize: titleFontSize} : '' ]}>Be Healthier</Animated.Text>
+                    <Animated.Text style={[styles.subtitleStyle,  this.state.selectedButton === 1 ? {fontSize: subtitleFontSize} : ''  ]}>Eat and train for optimum health</Animated.Text>
                 </AnimatedTouchableOpacity>
 
                 <AnimatedTouchableOpacity
-                    onPress={this.handlePress}
-                    style={[styles.customButton, animatedStyle]}
+                    onPress={() => this.handlePress(2)}
+                    style={[styles.customButton, this.state.selectedButton === 2 ?  animatedStyle : '']}
                 >
-                    <Animated.Text style={[styles.titleStyle, { fontSize: titleFontSize}]}>Lose Weight</Animated.Text>
-                    <Animated.Text style={[styles.subtitleStyle, {fontSize: subtitleFontSize}]}>Get leander and increase your stamina</Animated.Text>
+                    <Animated.Text style={[styles.titleStyle, this.state.selectedButton === 2 ?  { fontSize: titleFontSize} : '' ]}>Lose Weight</Animated.Text>
+                    <Animated.Text style={[styles.subtitleStyle,  this.state.selectedButton === 2 ? {fontSize: subtitleFontSize} : '' ]}>Get leander and increase your stamina</Animated.Text>
                 </AnimatedTouchableOpacity>
 
                 <AnimatedTouchableOpacity
-                    onPress={this.handlePress}
-                    style={[styles.customButton, animatedStyle]}
+                    onPress={() => this.handlePress(3)}
+                    style={[styles.customButton,  this.state.selectedButton === 3 ?  animatedStyle : '']}
                 >
-                        <Animated.Text style={[styles.titleStyle, { fontSize: titleFontSize}]}>Gain Weight</Animated.Text>
-                        <Animated.Text style={[styles.subtitleStyle, {fontSize: subtitleFontSize}]}>Build muscle strength</Animated.Text>
+                        <Animated.Text style={[styles.titleStyle, this.state.selectedButton === 3 ?  { fontSize: titleFontSize} : '' ]}>Gain Weight</Animated.Text>
+                        <Animated.Text style={[styles.subtitleStyle,  this.state.selectedButton === 3 ? {fontSize: subtitleFontSize} : '' ]}>Build muscle strength</Animated.Text>
                 </AnimatedTouchableOpacity>
             </LinearGradient>
         );
