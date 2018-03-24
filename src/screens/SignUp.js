@@ -39,7 +39,7 @@ class SignUp extends Component {
             }),
         ]).start(() => {
             setTimeout(() => {
-                this.props.navigation.navigate('ChooseGender')
+                this.props.navigation.navigate('ChooseGender');
             }, 200);
         });
     }

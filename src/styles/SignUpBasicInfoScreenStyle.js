@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import colors from '../assets/colors';
 
-const styles = StyleSheet.create({
+export const ChooseGenderStyle = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.whiteColor,
@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     buttonContainer: {
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -43,4 +44,17 @@ const styles = StyleSheet.create({
     },
 });
 
-export default styles;
+export const BasicInfoStyle = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: colors.whiteColor,
+    },
+    textInputContainer: {
+        flex: 1,
+        padding: 20,
+    },
+    textfield: {
+        marginTop: 30,
+    },
+});
+

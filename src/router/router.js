@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableHighlight } from 'react-native';
+import { Animated, Easing, TouchableHighlight } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -7,6 +7,7 @@ import AuthScreen from '../screens/Auth';
 import LoginScreen from '../screens/Login';
 import SignUpScreen from '../screens/SignUp';
 import ChooseGenderScreen from '../component/SignUp/ChooseGender';
+import BasicInfoScreen from '../component/SignUp/BasicInfo';
 
 
 import colors from '../assets/colors';
@@ -20,7 +21,6 @@ const Left = ({ onPress }) => (
         />
     </TouchableHighlight>
 );
-
 
 const StackNavigators = StackNavigator({
     Home: {
@@ -73,7 +73,25 @@ const StackNavigators = StackNavigator({
             headerLeft: <Left onPress={() => { navigation.goBack(); }} />,
         }),
     },
+    BasicInfo: {
+        screen: BasicInfoScreen,
+        navigationOptions: ({ navigation }) => ({
+            title: 'YOUR BASICS',
+            headerTitleStyle: {
+                color: colors.gradientColor1,
+                fontWeight: 'normal',
+                fontSize: 18,
+                alignSelf: 'center',
+            },
+            headerStyle: {
+                backgroundColor: colors.headerBackGroundShawdow,
+                marginTop: 20,
+                elevation: 0,
+                marginLeft: 20,
+            },
+            headerLeft: <Left onPress={() => { navigation.goBack(); }} />,
+        }),
+    },
 });
-
 
 export default StackNavigators;

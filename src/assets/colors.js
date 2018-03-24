@@ -7,6 +7,7 @@ const colors = {
     signUpButtonColor: '#767774',
     fontGreyColor: '#ABABAB',
     headerBackGroundShawdow: '#F2F4F9',
+    buttonShadowBackground: '#A7F1CB',
 };
 
 export default colors;
