@@ -52,9 +52,25 @@ export const BasicInfoStyle = StyleSheet.create({
     textInputContainer: {
         flex: 1,
         padding: 20,
+        marginTop: 20,
     },
-    textfield: {
-        marginTop: 30,
+    textInputWrapper: {
+        width: '100%',
+        height: 90,
+        marginTop: 10,
+        marginBottom: 10,
     },
+    heightWrapper: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    Input: {
+      width: '100%',
+    },
+    label: {
+        color: colors.gradientColor1,
+    },
+
 });
 

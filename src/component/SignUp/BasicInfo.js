@@ -1,85 +1,56 @@
 import React, { Component } from 'react';
-import { View, Text, StatusBar, ScrollView, TextInput } from 'react-native';
 import {
-    MKTextField,
-    MKColor,
-    mdl,
-} from 'react-native-material-kit';
+    View,
+    Text,
+    StatusBar,
+    ScrollView,
+    TextInput,
+    Animated,
+    Dimensions,
+    Image,
+    TouchableWithoutFeedback
+} from 'react-native';
+
 import colors from '../../assets/colors';
 import { ChooseGenderStyle, BasicInfoStyle } from '../../styles/SignUpBasicInfoScreenStyle';
 import { CustomButton } from '../common';
+import validate from '../../utility/validation';
 
-const Age = MKTextField.textfieldWithFloatingLabel()
-    .withPlaceholder('Your age')
-    .withStyle(BasicInfoStyle.textfield)
-    .withTextInputStyle({ flex: 1 })
-    .withFloatingLabelFont({
-        fontSize: 20,
-        fontStyle: 'italic',
-        fontWeight: '200',
-        color: colors.gradientColor1,
-    })
-    .withTintColor(colors.gradientColor2)
-    .withKeyboardType('numeric')
-    .withDefaultValue('20')
-    .withHighlightColor(colors.gradientColor2)
-    .withOnFocus(() => console.log('Focus'))
-    .withOnBlur(() => console.log('Blur'))
-    .withOnEndEditing((e) => console.log('EndEditing', e.nativeEvent.text))
-    .withOnSubmitEditing((e) => console.log('SubmitEditing', e.nativeEvent.text))
-    .withOnTextChange((e) => console.log('TextChange', e))
-    .withOnChangeText((e) => console.log('ChangeText', e))
-    .build();
-
-const Height = MKTextField.textfieldWithFloatingLabel()
-    .withPlaceholder('Your height')
-    .withStyle(BasicInfoStyle.textfield)
-    .withTextInputStyle({ flex: 1 })
-    .withFloatingLabelFont({
-        fontSize: 20,
-        fontStyle: 'italic',
-        fontWeight: '200',
-        color: colors.gradientColor1,
-    })
-    .withTintColor(colors.gradientColor2)
-    .withKeyboardType('numeric')
-    .withDefaultValue('20')
-    .withHighlightColor(colors.gradientColor2)
-    .withOnFocus(() => console.log('Focus'))
-    .withOnBlur(() => console.log('Blur'))
-    .withOnEndEditing((e) => console.log('EndEditing', e.nativeEvent.text))
-    .withOnSubmitEditing((e) => console.log('SubmitEditing', e.nativeEvent.text))
-    .withOnTextChange((e) => console.log('TextChange', e))
-    .withOnChangeText((e) => console.log('ChangeText', e))
-    .build();
-
-const Weight = MKTextField.textfieldWithFloatingLabel()
-    .withPlaceholder('Your width')
-    .withStyle(BasicInfoStyle.textfield)
-    .withTextInputStyle({ flex: 1 })
-    .withFloatingLabelFont({
-        fontSize: 20,
-        fontStyle: 'italic',
-        fontWeight: '200',
-        color: colors.gradientColor1,
-    })
-    .withTintColor(colors.gradientColor2)
-    .withKeyboardType('numeric')
-    .withDefaultValue('20')
-    .withHighlightColor(colors.gradientColor2)
-    .withOnFocus(() => console.log('Focus'))
-    .withOnBlur(() => console.log('Blur'))
-    .withOnEndEditing((e) => console.log('EndEditing', e.nativeEvent.text))
-    .withOnSubmitEditing((e) => console.log('SubmitEditing', e.nativeEvent.text))
-    .withOnTextChange((e) => console.log('TextChange', e))
-    .withOnChangeText((e) => console.log('ChangeText', e))
-    .build();
+const WINDOW_WIDTH = Dimensions.get('window').width;
+const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
 class ChooseGender extends Component {
     constructor(props) {
         super(props);
         this.state = {
             selectedGender: '',
+            addHeightInfo:  new Animated.Value(0),
+            controls: {
+                age: {
+                    value: '',
+                    valid : false,
+                    validationRules : {
+                        minLength: 3
+                    },
+                    touched :  false
+                },
+                height: {
+                    value: '',
+                    valid: false,
+                    validationRules: {
+                        minHeight: 1
+                    },
+                    touched: false
+                },
+                weight: {
+                    value: '',
+                    valid: false,
+                    validationRules: {
+                        minWidth: 1,
+                    },
+                    touched: false
+                }
+            }
         };
     }
     componentDidMount() {
@@ -89,7 +60,115 @@ class ChooseGender extends Component {
             selectedGender: gender,
         });
     }
+
+    updateInputState = (key, val) => {
+        console.log(key, val);
+        this.setState( prevState => {
+            return {
+                controls : {
+                    ...prevState.controls,
+                    [key] : {
+                        ...prevState.controls[key],
+                        value: val,
+                        valid: validate(val, prevState.controls[key].validationRules),
+                        touched: true,
+                    }
+                }
+            }
+        });
+        console.log(this.state.controls.height.valid);
+        if (key === 'height' && this.state.controls.height.valid) {
+            Animated.timing(this.state.addHeightInfo, {
+                toValue: 1,
+                duration: 1
+            }).start();
+        }
+    }
+    renderHeightIcon = (category, val) => {
+        switch (category) {
+            case category === 'height' :
+                if (this.state.controls.height.valid && category === 'height') {
+                    return (
+                        <TouchableWithoutFeedback>
+                            <Text>{val}</Text>
+                            <Image
+                                source={ require('../../assets/height.png') }
+                                style={{height: 40, width: 40}}
+                            />
+                        </TouchableWithoutFeedback>
+                    );
+                }else {
+                    return (
+                        <View style={BasicInfoStyle.textInputWrapper}>
+                            <Text style={BasicInfoStyle.label}>Your Age</Text>
+                            <TextInput
+                                style={BasicInfoStyle.Input}
+                                underlineColorAndroid={colors.gradientColor1}
+                                returnKeyType={'next'}
+                                secureTextEntry={false}
+                                keyboardType={'numeric'}
+                            />
+                        </View>
+                    );
+                }
+
+        }
+
+        if (this.state.controls.weight.valid && category === 'weight') {
+            return (
+                <TouchableWithoutFeedback>
+                    <Text>{val}</Text>
+                    <Image
+                        source={ require('../../assets/weight.png') }
+                        style={{height: 40, width: 40}}
+                    />
+                </TouchableWithoutFeedback>
+            );
+        }else {
+            return (
+                <View style={BasicInfoStyle.textInputWrapper}>
+                    <Text style={BasicInfoStyle.label}>Your Age</Text>
+                    <TextInput
+                        style={BasicInfoStyle.Input}
+                        underlineColorAndroid={colors.gradientColor1}
+                        returnKeyType={'next'}
+                        secureTextEntry={false}
+                        keyboardType={'numeric'}
+                    />
+                </View>
+            );
+        }
+        if (this.state.controls.height.valid && category === 'age') {
+            return (
+                <TouchableWithoutFeedback>
+                    <Text>{val}</Text>
+                    <Image
+                        source={ require('../../assets/age.png') }
+                        style={{height: 40, width: 40}}
+                    />
+                </TouchableWithoutFeedback>
+            );
+        }else {
+            return (
+                <View style={BasicInfoStyle.textInputWrapper}>
+                    <Text style={BasicInfoStyle.label}>Your Age</Text>
+                    <TextInput
+                        style={BasicInfoStyle.Input}
+                        underlineColorAndroid={colors.gradientColor1}
+                        returnKeyType={'next'}
+                        secureTextEntry={false}
+                        keyboardType={'numeric'}
+                    />
+                </View>
+            );
+        }
+    }
     render() {
+        const  heightBarChange = this.state.addHeightInfo.interpolate({
+            inputRange: [0, 1],
+            outputRange: [WINDOW_WIDTH, WINDOW_WIDTH - 100]
+        });
+
         return (
             <ScrollView >
                 <StatusBar
@@ -114,9 +193,9 @@ class ChooseGender extends Component {
                     </CustomButton>
                 </View>
                 <View style={BasicInfoStyle.textInputContainer}>
-                    <Age />
-                    <Height />
-                    <Weight />
+                    {this.renderHeightIcon('age', this.state.controls.age.value)}
+                    {this.renderHeightIcon('height', this.state.controls.height.value)}
+                    {this.renderHeightIcon('weight', this.state.controls.weight.value)}
                 </View>
             </ScrollView>
         );

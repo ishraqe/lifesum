@@ -6,7 +6,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const CustomButton = (props) => {
     const { buttonStyle, textStyle} = styles;
     const { label, imagePath } = props;
-    console.log(props);
     const content = (
         <View style={[buttonStyle, props.style]}>
             <Text style={[textStyle, props.textStyle]}>
@@ -55,7 +54,7 @@ const styles = {
         fontSize: 16,
         fontWeight: '600',
         paddingTop: 10,
-        paddingBottom: 10
+        paddingBottom: 10,
     },
     buttonStyle: {
         backgroundColor: '#fff',
